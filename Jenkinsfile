@@ -3,21 +3,21 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "akshatha29/app-image"
+        DOCKER_IMAGE = "apekshagowda56/401"
     }
 
     stages {
 
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/akshathavishal2901/final.git'
+                git 'https://github.com/apekshagowda56/app10.git'
             }
         }
 
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build("${DOCKER_IMAGE}:latest")
+                    docker.build("${DOCKER_IMAGE}:v1")
                 }
             }
         }
@@ -38,7 +38,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('', 'dockerhub-creds') {
-                        docker.image("${DOCKER_IMAGE}:latest").push()
+                        docker.image("${DOCKER_IMAGE}:v1").push()
                     }
                 }
             }
